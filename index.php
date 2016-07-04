@@ -43,6 +43,7 @@
 		<?php include(D_TEMPLATE."/footer.php"); ?>
 		
 		
+		<?php  if ($debug == 1 ) {  ?>
 		<div id="console-debug">
 			
 			<pre>
@@ -50,7 +51,7 @@
 			</pre>
 	
 		</div>
-		
+		<?php } ?>
 		
 	</body>
 	

@@ -1,5 +1,17 @@
 <?php
 
+	function data_setting_value($dbc,$id){
+	
+		$q = "SELECT * FROM settings WHERE id = '$id'" ;
+		$r = mysqli_query($dbc, $q);
+		
+		$debug = mysqli_fetch_assoc($r);
+		
+		return $debug['value'];
+	}
+
+
+
 	function data_page($dbc,$page_ID){
 		
 		$q = "SELECT * FROM pages WHERE id = $page_ID";

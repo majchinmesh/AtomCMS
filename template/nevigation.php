@@ -1,8 +1,11 @@
 <?php include("functions/template.php"); ?>
 
 <nav class="navbar navbar-default" role="nevigation">
-
-	<button id= "btn-debug" class="btn btn-default"><i class="fa fa-bug fa-2x" ></i></button>
+	
+	<?php if ($debug == 1){
+		echo '<button id= "btn-debug" class="btn btn-default"><i class="fa fa-bug fa-2x" ></i></button> ';
+	} 
+	?>
 
 	<div class="container">
 		
