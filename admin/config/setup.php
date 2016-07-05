@@ -1,10 +1,11 @@
 <?php 
+
+	//dbc connection
+	include("../config/connection.php");
+
 	// all functions 
 	include("functions/data.php");
-	
-	//dbc connection
-	include("connection.php");
-	
+
 	//constants	
 	DEFINE("D_TEMPLATE","template") ;	
 	

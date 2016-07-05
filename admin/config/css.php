@@ -66,6 +66,8 @@
 	
 	#btn-debug{
 		position : absolute ;
+		right : 5px ;
+		top : 3px ;
 	}
 	#console-debug{
 		position : absolute ;

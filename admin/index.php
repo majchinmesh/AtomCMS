@@ -1,4 +1,18 @@
-<?php 	include('config/setup.php'); ?>
+<?php
+
+	# start the session
+	session_start();
+	
+	if(!isset($_SESSION['username'])){
+		
+		header('Location: login.php');	
+	}
+	
+?>
+
+
+
+<?php 	include('config/setup.php');?>
 
 
 <!DOCTYPE html>
@@ -22,19 +36,11 @@
 			<?php include(D_TEMPLATE."/nevigation.php"); ?>
 			
 			
-			<header class="container">
+			<header>
 				
-				<h1>  <?php echo $page_data['header']  ?>  </h1>
+				<h1>Admin Dashboard</h1>
 				
 			</header>
-			
-			
-			
-			
-			<!-- Body -->
-			<div class="container">
-				<?php echo $page_data['formated_body'] ?>
-			</div>
 			
 			
 			
