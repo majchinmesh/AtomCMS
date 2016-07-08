@@ -17,7 +17,7 @@
 	
 	
 	
-	$page_ID = 1 ; // set page_ID to default 1 
+	$page_ID = 'home' ; // set page_ID to default 1 
 	if ( isset($_GET['page'])){
 		$page_ID = $_GET['page'] ; // set page_ID to the value specified in the URL
 	}

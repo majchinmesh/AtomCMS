@@ -1,5 +1,7 @@
 <?php 
 
+	error_reporting(0);
+
 	//dbc connection
 	include("../config/connection.php");
  
@@ -27,6 +29,11 @@
 	// Page setup
 	$page_data = data_page($dbc,$page_ID) ;
 	
+	
+	
+	if(isset($_GET['id'])){
+		$opened = data_page($dbc,$_GET['id']);	
+	}
 	
 	
 	// user setup 

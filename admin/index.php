@@ -22,10 +22,19 @@
 		
 		$title = mysqli_real_escape_string($dbc, $_POST['title']) ;
 		$lable = mysqli_real_escape_string($dbc, $_POST['lable']) ;
+		$slug = mysqli_real_escape_string($dbc, $_POST['slug']) ;
 		$header = mysqli_real_escape_string($dbc, $_POST['header']) ;
 		$body = mysqli_real_escape_string($dbc, $_POST['body']) ;
-		
-		$q = "INSERT INTO pages (`user_id`,`title`, `lable`,`header`,`body`) VALUES ($_POST[user_id] ,'$title','$lable','$header','$body')" ;
+
+
+		if($_POST['update']!=''){
+			
+			$q = "UPDATE pages SET title = '$title' , header = '$header', slug='$slug', body='$body',lable='$lable', user_id = $_POST[user_id]  WHERE id = $_GET[id]";
+			
+		}else{
+			
+			$q = "INSERT INTO pages (`user_id`,`title`,`slug`, `lable`,`header`,`body`) VALUES ($_POST[user_id] ,'$title','$slug','$lable','$header','$body')" ;
+		}
 		$r = mysqli_query($dbc, $q);
 		
 		if ($r){
@@ -34,10 +43,11 @@
 			$message = '<p>Page could not be added because:'.mysqli_error($dbc).'</p>' ;
 			$message .= '<p>'.$q.'</p>';								
 		}		
+
+
 	}
 					
 ?>
-
 
 
 <!DOCTYPE html>
@@ -73,6 +83,12 @@
 					
 					
 					<div class="list-group">
+						
+						<a href="index.php" class="list-group-item ">
+						
+							<h4 class="list-group-item-heading"><i class="fa fa-plus"></i><b> New Page</b></h4>
+						</a>
+					
 						<?php 
 						
 							$q = "SELECT * FROM pages ORDER BY title ASC" ;
@@ -83,7 +99,7 @@
 								$blurd = substr(strip_tags($page_list['body']), 0,60);
 						?>
 						
-								<a href="#" class="list-group-item ">
+								<a href="index.php?id=<?php echo $page_list['id'] ; ?>" class="list-group-item  <?php if( $page_list['id'] == $opened['id'] ){ echo "active";} ?>">
 									
 									<h4 class="list-group-item-heading"><?php echo $page_list['title'] ; ?></h4>
    									<p class="list-group-item-text"><?php echo $blurd ; ?></p>
@@ -107,12 +123,12 @@
 						}
 					?>
 					
-					<form method="post" action="index.php" role="form">
+					<form method="post" action="index.php?id=<?php echo $opened['id']?>" role="form">
 						
 						<div class="form-grpup" >
 							
 							<label for="title">Title:</label>
-							<input class="form-control" type="text" name="title" id="title" placeholder="Page title" />
+							<input class="form-control" type="text" name="title" id="title" <?php echo "value='$opened[title]'" ;?> placeholder="Page title" />
 							
 						</div>	
 						
@@ -133,8 +149,22 @@
 									while($user_list = mysqli_fetch_assoc($r)){
 										$id = $user_list['id'];
 										$user_data = data_user($dbc,$id);
+										
+										
+										if ( isset($opened) and ($opened['user_id'] == $user_data['id'] )){
+											
+											$isSelected = "selected" ;
+										}else{
+											if ($user['id'] == $user_data['id'] ){	
+												$isSelected = "selected" ;
+											}
+											else {
+												$isSelected = "" ;
+											}
+										}
+							
 													
-										echo "<option value='$id'>$user_data[fullname]</option>";
+										echo "<option value='$id'".$isSelected." >$user_data[fullname]</option>";
 									
 									}									
 								?>
@@ -150,7 +180,7 @@
 						<div class="form-grpup" >
 							
 							<label for="lable">Lable:</label>
-							<input class="form-control" type="text" name="lable" id="lable" placeholder="Page lable" />
+							<input class="form-control" type="text" name="lable" <?php echo "value='$opened[lable]'" ;?> id="lable" placeholder="Page lable" />
 							
 						</div>
 						
@@ -158,8 +188,18 @@
 						
 						<div class="form-grpup" >
 							
+							<label for="slug">Slug:</label>
+							<input class="form-control" type="text" name="slug" <?php echo "value='$opened[slug]'" ; ?> id="slug" placeholder="Page slug" />
+							
+						</div>
+						
+						<br>
+						
+						
+						<div class="form-grpup" >
+							
 							<label for="header">Header:</label>
-							<input class="form-control" type="text" name="header" id="header" placeholder="Page header" />
+							<input class="form-control" type="text" name="header" id="header" <?php echo "value='$opened[header]'"; ?> placeholder="Page header" />
 							
 						</div>						
 						
@@ -168,13 +208,14 @@
 						<div class="form-grpup" >
 							
 							<label for="body">Body:</label>
-							<textarea class="form-control"  name="body" rows="8" id="body" placeholder="Page body" ></textarea>
+							<textarea class="form-control editor"  name="body" rows="8" id="body" placeholder="Page body" ><?php echo $opened[body]; ?></textarea>
 							
 						</div>	
 						
 						<br>
 						
 						<input type="hidden" value="1" name="submitted"/> <!--since all input fields will be sent as a post array, submitted will also be sent and it will be set to 1 by default and we can check this later to run the mysql query-->
+						<input type="hidden" value="<?php echo $opened[id]; ?>" name="update"/>
 						<button  type="submit" class="btn btn-default">Save</button>
 					
 					</form>

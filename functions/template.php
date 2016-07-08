@@ -6,7 +6,7 @@
 		
 		while( $nav = mysqli_fetch_assoc($r) ){ 
 				
-			$page_id =  $nav['id'];
+			$page_slug =  $nav['slug'];
 			$page_title = $nav['lable'];
 			
 			$active_page = 1 ;
@@ -14,7 +14,7 @@
 				$active_page = $_GET['page'] ;
 			}
 		?>
-			<li<?php if($page_id == $active_page ) echo(' class="active"') ?> > <a href="?page=<?php echo $page_id ?>"><?php echo $page_title ?></a></li>	
+			<li<?php if($page_slug == $active_page ) echo(' class="active"') ?> > <a href="?page=<?php echo $page_slug ?>"><?php echo $page_title ?></a></li>	
 				
 	
 	<?php		
