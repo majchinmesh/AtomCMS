@@ -15,15 +15,15 @@
 		
 		if (is_numeric($user_ID)) {
 			
-			$q = "SELECT * FROM users WHERE id = '$user_ID'" ;
+			$uid = 'id';
 		}
 		else {
 			
-			$q = "SELECT * FROM users WHERE email_id = '$user_ID'" ;	
+			$uid = 'email_id' ;
 			
 		}
 		
-		
+		$q = "SELECT * FROM users WHERE ".$uid." = '$user_ID'" ;	
 		$r = mysqli_query($dbc, $q);
 		$data = mysqli_fetch_assoc($r) ;
 		$data['fullname'] = $data['first_name'].' '.$data['last_name'] ;

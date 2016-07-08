@@ -127,14 +127,14 @@
 								<option value="0" >No user</option>
 								<?php
 									
-									$q = "SELECT email_id FROM users ORDER BY first_name ASC";
+									$q = "SELECT id FROM users ORDER BY first_name ASC";
 									$r = mysqli_query($dbc, $q);
 									
 									while($user_list = mysqli_fetch_assoc($r)){
-										$email_id = $user_list['email_id'];
-										$user_data = data_user($dbc,$email_id);
+										$id = $user_list['id'];
+										$user_data = data_user($dbc,$id);
 													
-										echo "<option value='$user_data[id]'>$user_data[fullname]</option>";
+										echo "<option value='$id'>$user_data[fullname]</option>";
 									
 									}									
 								?>
