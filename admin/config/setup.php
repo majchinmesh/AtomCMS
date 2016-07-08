@@ -2,7 +2,7 @@
 
 	//dbc connection
 	include("../config/connection.php");
-
+ 
 	// all functions 
 	include("functions/data.php");
 
@@ -25,7 +25,12 @@
 	
 	
 	// Page setup
-	$page_data = data_page($dbc,$page_ID) ; 
+	$page_data = data_page($dbc,$page_ID) ;
 	
+	
+	
+	// user setup 
+	$user_ID = $_SESSION['user_ID'];
+	$user = data_user($dbc,$user_ID);	
 
 ?>

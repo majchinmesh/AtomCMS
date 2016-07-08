@@ -17,7 +17,7 @@
 		
 		if (mysqli_num_rows($r) == 1 ){
 			
-			$_SESSION['username'] = $email ;
+			$_SESSION['user_ID'] = $email ;
 			header('Location: index.php');
 		}
 		
