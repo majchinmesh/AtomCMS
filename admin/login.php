@@ -15,10 +15,21 @@
 		$q = "SELECT 'password' FROM users WHERE email_id = '$email' AND password = sha1('$password')" ; 
 		$r = mysqli_query($dbc, $q);
 		
+		#echo $password ;
+		echo sha1($password) ; 
+		echo mysqli_fetch_assoc($r);
+		
 		if (mysqli_num_rows($r) == 1 ){
 			
 			$_SESSION['user_ID'] = $email ;
 			header('Location: index.php');
+		}
+		else{
+			
+			#echo "Login failed";
+			$q = "SELECT * FROM users" ; 
+			$r = mysqli_query($dbc, $q);
+			#print_r(mysqli_fetch_assoc($r));
 		}
 		
 	}
