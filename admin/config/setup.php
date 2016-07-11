@@ -7,6 +7,9 @@
  
 	// all functions 
 	include("functions/data.php");
+	
+	// other functions 
+	include('functions/sendbox.php');
 
 	//constants	
 	DEFINE("D_TEMPLATE","template") ;	
@@ -27,6 +30,7 @@
 	
 	
 	// Page setup
+	include("config/quries.php");
 	$page_data = data_page($dbc,$page_ID) ;
 	
 	

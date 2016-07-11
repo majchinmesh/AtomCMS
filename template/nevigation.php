@@ -11,7 +11,7 @@
 		
 		<ul class="nav navbar-nav">
 			<?php
-				nav_main($dbc);	
+				nav_main($dbc,$path);	
 			?>
 			
 		</ul>	

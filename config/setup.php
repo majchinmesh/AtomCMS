@@ -1,6 +1,10 @@
 <?php 
+
+	error_reporting(0);
+
 	// all functions 
 	include("functions/data.php");
+	include("functions/sendbox.php");
 	
 	//dbc connection
 	include("connection.php");
@@ -15,16 +19,20 @@
 	$debug = data_setting_value($dbc, 'debug-status');
 	
 	
+	$path = get_path();
 	
 	
-	$page_ID = 'home' ; // set page_ID to default 1 
-	if ( isset($_GET['page'])){
-		$page_ID = $_GET['page'] ; // set page_ID to the value specified in the URL
+	 
+	if ( !isset($path['call_parts'][0]) || $path['call_parts'][0] ==''   ){
+			
+		$path['call_parts'][0] = 'home' ;
+		header("Location: home");	
+			
 	}
 	
 	
 	// Page setup
-	$page_data = data_page($dbc,$page_ID) ; 
+	$page_data = data_page($dbc,$path['call_parts'][0]) ; 
 	
 
 ?>

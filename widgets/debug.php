@@ -6,6 +6,13 @@
 	
 	?>
 	
+	<h1>Path Array</h1>
+	<pre>	
+		<?php
+			print_r($path); 
+		?>
+	</pre>
+	
 	<h1>GET</h1>
 	<pre>
 		
@@ -30,5 +37,6 @@
 			print_r($page_data); 
 		?>
 	</pre>
+	
 
 </div>

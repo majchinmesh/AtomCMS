@@ -15,41 +15,6 @@
 <?php 	include('config/setup.php');?>
 
 
-
-<?php
-	
-	if( isset($_POST['submitted']) == 1 ){
-		
-		$title = mysqli_real_escape_string($dbc, $_POST['title']) ;
-		$lable = mysqli_real_escape_string($dbc, $_POST['lable']) ;
-		$slug = mysqli_real_escape_string($dbc, $_POST['slug']) ;
-		$header = mysqli_real_escape_string($dbc, $_POST['header']) ;
-		$body = mysqli_real_escape_string($dbc, $_POST['body']) ;
-
-
-		if($_POST['update']!=''){
-			
-			$q = "UPDATE pages SET title = '$title' , header = '$header', slug='$slug', body='$body',lable='$lable', user_id = $_POST[user_id]  WHERE id = $_GET[id]";
-			
-		}else{
-			
-			$q = "INSERT INTO pages (`user_id`,`title`,`slug`, `lable`,`header`,`body`) VALUES ($_POST[user_id] ,'$title','$slug','$lable','$header','$body')" ;
-		}
-		$r = mysqli_query($dbc, $q);
-		
-		if ($r){
-			$message = "<p>Page was added</p>" ;
-		}else {
-			$message = '<p>Page could not be added because:'.mysqli_error($dbc).'</p>' ;
-			$message .= '<p>'.$q.'</p>';								
-		}		
-
-
-	}
-					
-?>
-
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -86,7 +51,7 @@
 						
 						<a href="index.php" class="list-group-item ">
 						
-							<h4 class="list-group-item-heading"><i class="fa fa-plus"></i><b> New Page</b></h4>
+							<i class="fa fa-plus"></i> New Page
 						</a>
 					
 						<?php 
@@ -99,7 +64,7 @@
 								$blurd = substr(strip_tags($page_list['body']), 0,60);
 						?>
 						
-								<a href="index.php?id=<?php echo $page_list['id'] ; ?>" class="list-group-item  <?php if( $page_list['id'] == $opened['id'] ){ echo "active";} ?>">
+								<a href="index.php?id=<?php echo $page_list['id'] ; ?>" class="list-group-item  <?php echo selected($page_list['id'], $opened['id'], "active") ; ?>">
 									
 									<h4 class="list-group-item-heading"><?php echo $page_list['title'] ; ?></h4>
    									<p class="list-group-item-text"><?php echo $blurd ; ?></p>
@@ -151,16 +116,11 @@
 										$user_data = data_user($dbc,$id);
 										
 										
-										if ( isset($opened) and ($opened['user_id'] == $user_data['id'] )){
-											
-											$isSelected = "selected" ;
+										if ( isset($opened) ){
+											$isSelected = selected( $opened['user_id'] , $user_data['id'] , "selected" );
 										}else{
-											if ($user['id'] == $user_data['id'] ){	
-												$isSelected = "selected" ;
-											}
-											else {
-												$isSelected = "" ;
-											}
+											
+											$isSelected = selected( $user['id'] , $user_data['id'] , "selected" );
 										}
 							
 													
