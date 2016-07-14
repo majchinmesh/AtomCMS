@@ -7,11 +7,6 @@
 ?>
 
 
-
-
-
-
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -20,6 +15,9 @@
 
 <!-- jQueryUI CSS-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<!-- dropzone CSS-->
+<link rel="stylesheet" href="css/dropzone.css" />
 
 <!-- Fontawesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />	
@@ -83,6 +81,15 @@
 	}
 	#console-debug pre{
 		
+	}
+	
+	.avatar-container{
+		
+		height:100px;
+		width: 100px ;
+		border-radius : 3px ;
+		background-size:cover ;
+		background-position : center center ;	
 	}
 	
 	

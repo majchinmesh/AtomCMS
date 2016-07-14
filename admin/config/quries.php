@@ -44,10 +44,30 @@
 			
 		case 'settings' :
 			
-			
+				if( isset($_POST['submitted']) == 1 ){
+							
+				#$id = mysqli_real_escape_string($dbc, $_POST['id']) ;
+				$value = mysqli_real_escape_string($dbc, $_POST['value']) ;
+				$lable = mysqli_real_escape_string($dbc, $_POST['lable']) ;
+				
+				if($_POST['openedid']!=''){	
+					$q = "UPDATE settings SET id='$_POST[id]', value='$value' , lable='$lable' WHERE id = '$_POST[openedid]'";
+				}
+				
+				$r = mysqli_query($dbc, $q);	
+				if ($r){
+					$message = "<p class='alert alert-success' >Settings was updated </p>" ;
+				}else {
+					
+					$message = "<p class='alert alert-danger' >Settings could not be updated because:".mysqli_error($dbc)."'and/or</p>" ;
+					$message .= '<p class="alert alert-warning" >Query: '.$q.'</p>';								
+				}		
+			}			
+		
 			break ;
 
 		case 'users' :
+
 			
 			if( isset($_POST['submitted']) == 1 ){		
 				$first_name = mysqli_real_escape_string($dbc, $_POST['first_name']) ;
